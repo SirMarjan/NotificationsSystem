@@ -1,0 +1,8 @@
+@import 'modern-normalize/modern-normalize.css';
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

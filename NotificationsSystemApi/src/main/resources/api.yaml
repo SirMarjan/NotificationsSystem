@@ -1,0 +1,195 @@
+openapi: 3.1.0
+info:
+  title: Notification system api
+  version: 1.0.0
+
+paths:
+  /api/new-price:
+    post:
+      description: "Set up new price"
+      operationId: postNewPrice
+      tags:
+        - price
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewPrice"
+      responses:
+        "200":
+          description: "Successfully set up new price"
+
+  /api/template:
+    get:
+      description: "Return list of all templates"
+      operationId: getTemplatesList
+      tags:
+        - template
+      responses:
+        "200":
+          description: "Templates list"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TemplateListElement"
+    post:
+      description: "Add new template"
+      operationId: addNewTemplate
+      tags:
+        - template
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TemplateDetails"
+      responses:
+        "200":
+          description: "Successfully added new template"
+          content:
+            application/json:
+              schema:
+                title: AddNewTemplateResponse
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                required:
+                  - id
+  /api/template/{templateId}:
+    get:
+      description: "Return details of the template"
+      operationId: getTemplateDetails
+      tags:
+        - template
+      parameters:
+        - name: templateId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: "Templates details"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TemplateDetails"
+    put:
+      description: "Update template"
+      operationId: updateTemplate
+      tags:
+        - template
+      parameters:
+        - name: templateId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TemplateDetails"
+      responses:
+        "200":
+          description: "Successfully added new template"
+          content:
+            application/json:
+              schema:
+                title: UpdateTemplateResponse
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                required:
+                  - id
+
+components:
+  schemas:
+    ItemType:
+      description: "Type of supported items"
+      type: string
+      enum:
+        - gold
+        - silver
+        - platinum
+    NewPrice:
+      description: "New price"
+      type: object
+      properties:
+        itemType:
+          $ref: "#/components/schemas/ItemType"
+        price:
+          type: string
+          pattern: '^\d+\.\d{2}$'
+      required:
+        - itemType
+        - price
+    TemplateListElement:
+      description: "Single template element for list"
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+          minLength: 1
+          maxLength: 50
+      required:
+        - id
+        - title
+    TemplateDetails:
+      description: "Details of template"
+      type: object
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 50
+        receiversEmails:
+          type: array
+          items:
+            type: string
+            format: email
+        content:
+          type: string
+          minLength: 1
+          maxLength: 500
+        rules:
+          type: array
+          items:
+            $ref: "#/components/schemas/Rule"
+      required:
+        - title
+        - receiversEmails
+        - content
+        - rules
+    Rule:
+      description: "Rule for template trigger"
+      type: object
+      properties:
+        operator:
+          type: string
+          enum:
+            - ITEM_IS
+            - ITEM_IS_NOT
+            - PRICE_EQUALS
+            - PRICE_GREATER_OR_EQUALS
+            - PRICE_GREATER
+            - PRICE_LESS_OR_EQUALS
+            - PRICE_LESS
+        operand:
+          type: string
+      required:
+        - operator
+        - operand

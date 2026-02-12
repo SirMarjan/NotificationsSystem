@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>pl.marcinsobanski.notificationssystem</groupId>
+        <artifactId>NotificationsSystem</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>pl.marcinsobanski.notificationssystem.api</groupId>
+    <artifactId>NotificationsSystemApi</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
+            <version>3.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>7.19.0</version>
+                <executions>
+                    <execution>
+                        <id>generate-spring</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${project.basedir}/src/main/resources/api.yaml</inputSpec>
+                            <generatorName>spring</generatorName>
+
+                            <generateApiTests>false</generateApiTests>
+                            <generateModelTests>false</generateModelTests>
+                            <generateSupportingFiles>false</generateSupportingFiles>
+                            <generateModelDocumentation>false</generateModelDocumentation>
+                            <generateApiDocumentation>false</generateApiDocumentation>
+
+                            <configOptions>
+                                <useSpringBoot3>true</useSpringBoot3>
+                                <useBeanValidation>true</useBeanValidation>
+                                <interfaceOnly>true</interfaceOnly>
+                                <apiPackage>pl.marcinsobanski.notificationssystem.api.endpoint</apiPackage>
+                                <modelPackage>pl.marcinsobanski.notificationssystem.api.model</modelPackage>
+                                <openApiNullable>false</openApiNullable>
+                                <skipDefaultInterface>true</skipDefaultInterface>
+                                <useTags>true</useTags>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                    <!--                    <execution>-->
+                    <!--                        <id>generate-typescript</id>-->
+                    <!--                        <goals>-->
+                    <!--                            <goal>generate</goal>-->
+                    <!--                        </goals>-->
+                    <!--                        <configuration>-->
+                    <!--                            <inputSpec>${project.basedir}/src/main/resources/api.yaml</inputSpec>-->
+                    <!--                            <generatorName>typescript-fetch</generatorName>-->
+                    <!--                            <output>${project.basedir}/../NotificationsSystemFront/src/generated-api</output>-->
+
+                    <!--                            <generateApiTests>false</generateApiTests>-->
+                    <!--                            <generateModelTests>false</generateModelTests>-->
+                    <!--                            <generateModelDocumentation>false</generateModelDocumentation>-->
+                    <!--                            <generateApiDocumentation>false</generateApiDocumentation>-->
+
+                    <!--                            <configOptions>-->
+                    <!--                                <supportsES6>true</supportsES6>-->
+                    <!--                                <typescriptThreePlus>true</typescriptThreePlus>-->
+                    <!--                            </configOptions>-->
+                    <!--                        </configuration>-->
+                    <!--                    </execution>-->
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

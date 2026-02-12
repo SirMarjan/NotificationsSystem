@@ -1,0 +1,39 @@
+services:
+  frontend:
+    build:
+      context: ../NotificationsSystemFront
+      dockerfile: Dockerfile
+    pull_policy: build
+    ports:
+      - "80:80"
+    networks:
+      - notifications-network
+    depends_on:
+      - backend
+  backend:
+    build:
+      context: ..
+      dockerfile: ./NotificationsSystemInfrastructure/Dockerfile
+    pull_policy: build
+    ports:
+      - "8080:8080"
+    networks:
+      - notifications-network
+    volumes:
+      - h2-data:/data
+  mailpit:
+    image: axllent/mailpit
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+    networks:
+      - notifications-network
+
+networks:
+  notifications-network:
+    driver: bridge
+    name: notifications-network
+
+volumes:
+  h2-data:
+    name: notification-h2-data
