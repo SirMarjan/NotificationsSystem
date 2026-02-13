@@ -11,10 +11,7 @@ import pl.marcinsobanski.notificationssystem.api.model.AddNewTemplateResponse;
 import pl.marcinsobanski.notificationssystem.api.model.TemplateDetails;
 import pl.marcinsobanski.notificationssystem.api.model.TemplateListElement;
 import pl.marcinsobanski.notificationssystem.api.model.UpdateTemplateResponse;
-import pl.marcinsobanski.notificationssystem.application.createtemplate.CreateTemplateCommandHandler;
-import pl.marcinsobanski.notificationssystem.application.listtemplates.ListTemplatesQueryHandler;
-import pl.marcinsobanski.notificationssystem.application.replacetemplate.ReplaceTemplateCommandHandler;
-import pl.marcinsobanski.notificationssystem.application.templatedetails.TemplateDetailsQueryHandler;
+import pl.marcinsobanski.notificationssystem.infrastructure.adapters.cqrs.CQCommandHandlerImpl;
 
 import java.util.List;
 import java.util.UUID;
@@ -23,10 +20,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class TemplateApiImpl implements TemplateApi {
 
-    private final ListTemplatesQueryHandler listTemplatesQueryHandler;
-    private final TemplateDetailsQueryHandler templateDetailsQueryHandler;
-    private final CreateTemplateCommandHandler createTemplateCommandHandler;
-    private final ReplaceTemplateCommandHandler replaceTemplateCommandHandler;
+    private final CQCommandHandlerImpl cqCommandHandler;
     private final TemplateDetailsViewToTemplateDetailsConverter templateDetailsViewToTemplateDetailsConverter;
     private final TemplateDetailsToCreateTemplateCommandConverter templateDetailsToCreateTemplateCommandConverter;
     private final TemplateDetailsToReplaceTemplateCommandConverter templateDetailsToReplaceTemplateCommandConverter;
@@ -34,19 +28,19 @@ public class TemplateApiImpl implements TemplateApi {
     @Override
     @Transactional
     public ResponseEntity<AddNewTemplateResponse> addNewTemplate(TemplateDetails templateDetails) {
-        final var result = createTemplateCommandHandler.handle(templateDetailsToCreateTemplateCommandConverter.convert(templateDetails));
+        final var result = cqCommandHandler.executeCommand(templateDetailsToCreateTemplateCommandConverter.convert(templateDetails));
         return ResponseEntity.ok(new AddNewTemplateResponse(result.templateId()));
     }
 
     @Override
     public ResponseEntity<TemplateDetails> getTemplateDetails(UUID templateId) {
-        final var template = templateDetailsQueryHandler.handle(new TemplateDetailsQuery(templateId));
+        final var template = cqCommandHandler.executeQuery(new TemplateDetailsQuery(templateId));
         return ResponseEntity.ok(templateDetailsViewToTemplateDetailsConverter.convert(template));
     }
 
     @Override
     public ResponseEntity<List<TemplateListElement>> getTemplatesList() {
-        final var templates = listTemplatesQueryHandler.handle(new ListTemplatesQuery());
+        final var templates = cqCommandHandler.executeQuery(new ListTemplatesQuery());
         return ResponseEntity.ok(templates.templateListElements().stream()
                 .map(templateListItem -> new TemplateListElement(templateListItem.id(), templateListItem.title()))
                 .toList());
@@ -56,7 +50,7 @@ public class TemplateApiImpl implements TemplateApi {
     @Transactional
     public ResponseEntity<UpdateTemplateResponse> updateTemplate(UUID templateId, TemplateDetails templateDetails) {
         final var replaceTemplateCommand = templateDetailsToReplaceTemplateCommandConverter.convert(templateDetails, templateId);
-        replaceTemplateCommandHandler.handle(replaceTemplateCommand);
+        cqCommandHandler.executeCommand(replaceTemplateCommand);
         return ResponseEntity.ok(new UpdateTemplateResponse(templateId));
     }
 

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.marcinsobanski.notificationssystem.api.cqrs.sendnewprice.SendNewPriceCommand;
 import pl.marcinsobanski.notificationssystem.api.endpoint.PriceApi;
 import pl.marcinsobanski.notificationssystem.api.model.NewPrice;
-import pl.marcinsobanski.notificationssystem.application.sendnewprice.SendNewPriceCommandHandler;
+import pl.marcinsobanski.notificationssystem.infrastructure.adapters.cqrs.CQCommandHandlerImpl;
 
 import java.math.BigDecimal;
 
@@ -14,11 +14,11 @@ import java.math.BigDecimal;
 @RequiredArgsConstructor
 public class PriceApiImpl implements PriceApi {
 
-    private final SendNewPriceCommandHandler sendNewPriceCommandHandler;
+    private final CQCommandHandlerImpl cqCommandHandler;
 
     @Override
     public ResponseEntity<Void> postNewPrice(NewPrice newPrice) {
-        sendNewPriceCommandHandler.handle(new SendNewPriceCommand(switch (newPrice.getItemType()) {
+        cqCommandHandler.executeCommand(new SendNewPriceCommand(switch (newPrice.getItemType()) {
             case GOLD -> SendNewPriceCommand.ItemType.GOLD;
             case SILVER -> SendNewPriceCommand.ItemType.SILVER;
             case PLATINUM -> SendNewPriceCommand.ItemType.PLATINUM;
