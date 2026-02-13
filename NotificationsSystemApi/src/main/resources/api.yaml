@@ -131,6 +131,7 @@ components:
         price:
           type: string
           pattern: '^\d+\.\d{2}$'
+          example: "12.00"
       required:
         - itemType
         - price
