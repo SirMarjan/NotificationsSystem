@@ -4,7 +4,7 @@
 
 Start class: `src/main/java/pl/marcinsobanski/notificationssystem/infrastructure/Application.java`
 
-Run with `docker` enable persistent database located in `/data/h2db`, by default in memory, can be changed in
+Run with `docker` profile enable persistent database located in `/data/h2db`, by default in memory h2, can be changed in
 `application-docker.yaml`
 
 Url:
