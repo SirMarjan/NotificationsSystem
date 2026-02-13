@@ -219,6 +219,7 @@ class TemplateApiImplIT {
     @Test
     void shouldReplaceTemplate() throws Exception {
         // GIVEN
+        final var creationTime = Instant.parse("2007-12-03T10:15:30.00Z");
         final var templateEntity = TemplateEntity.builder()
                 .title("Title")
                 .content("Content")
@@ -233,7 +234,7 @@ class TemplateApiImplIT {
                                 .itemTypeOperand(ItemType.PLATINUM)
                                 .build()
                 )))
-                .creationTime(Instant.now())
+                .creationTime(creationTime)
                 .build();
 
         final var savedTemplateId = templateJpaRepository.save(templateEntity).getId();
@@ -263,6 +264,7 @@ class TemplateApiImplIT {
         assertEquals("Content2", savedTemplate.getContent());
         assertEquals(List.of("a3@a.com"), savedTemplate.getReceiversEmails());
         assertEquals(3, savedTemplate.getRules().size());
+        assertEquals(creationTime, savedTemplate.getCreationTime());
 
         final var rules = ruleJpaRepository.findAll();
         assertEquals(3, rules.size());

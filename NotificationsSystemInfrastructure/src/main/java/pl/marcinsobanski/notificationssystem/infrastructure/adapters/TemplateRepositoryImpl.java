@@ -11,6 +11,7 @@ import pl.marcinsobanski.notificationssystem.infrastructure.repository.RuleJpaRe
 import pl.marcinsobanski.notificationssystem.infrastructure.repository.TemplateJpaRepository;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -25,6 +26,11 @@ public class TemplateRepositoryImpl implements TemplateRepository {
     private final RuleJpaRepository ruleJpaRepository;
     private final TemplateEntityToTemplateConverter templateEntityToTemplateConverter;
     private final TemplateToTemplateEntityConverter templateToTemplateEntityConverter;
+
+    @Override
+    public Instant getTemplateCreationTime(UUID id) {
+        return templateJpaRepository.findTemplateCreationTimeById(id).orElseThrow();
+    }
 
     @Override
     public List<SimpleTemplate> getAllSimpleTemplates() {

@@ -7,6 +7,7 @@ import pl.marcinsobanski.notificationssystem.domain.template.ItemType;
 import pl.marcinsobanski.notificationssystem.domain.template.SimpleTemplate;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -41,4 +42,7 @@ public interface TemplateJpaRepository extends JpaRepository<TemplateEntity, UUI
             ItemType itemType,
             BigDecimal price
     );
+
+    @Query("SELECT t.creationTime FROM TemplateEntity t where t.id = :id")
+    Optional<Instant> findTemplateCreationTimeById(UUID id);
 }

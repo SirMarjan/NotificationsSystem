@@ -29,7 +29,8 @@ public class ReplaceTemplateCommandHandler implements CommandHandler<Void, Repla
                 .content(command.content())
                 .receiversEmails(command.receiversEmails())
                 .rules(command.rules().stream().map(ruleConverter::convertRule).toList())
-                .creationTime(Instant.now()).build();
+                .creationTime(templateRepository.getTemplateCreationTime(command.id()))
+                .build();
         templateRepository.updateTemplate(template);
 
         compiledRuleFactory
