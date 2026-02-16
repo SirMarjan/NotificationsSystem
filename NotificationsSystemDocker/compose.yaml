@@ -28,6 +28,21 @@ services:
       - "1025:1025"
     networks:
       - notifications-network
+  zipkin:
+    image: openzipkin/zipkin:latest
+    container_name: zipkin-server
+    ports:
+      - "9411:9411"
+    networks:
+      - notifications-network
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    networks:
+      - notifications-network
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
 
 networks:
   notifications-network:
