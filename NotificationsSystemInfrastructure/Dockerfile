@@ -10,6 +10,7 @@ COPY ./NotificationsSystemDomain/pom.xml ./NotificationsSystemDomain/
 COPY ./NotificationsSystemInfrastructure/pom.xml ./NotificationsSystemInfrastructure/
 COPY ./NotificationsSystemFront/pom.xml ./NotificationsSystemFront/
 COPY ./NotificationsSystemDocker/pom.xml ./NotificationsSystemDocker/
+COPY ./NotificationsSystemCoverageReport/pom.xml ./NotificationsSystemCoverageReport/
 
 RUN mvn dependency:go-offline -pl NotificationsSystemInfrastructure -am
 
