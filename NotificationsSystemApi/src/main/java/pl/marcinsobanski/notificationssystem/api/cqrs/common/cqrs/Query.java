@@ -1,4 +1,4 @@
 package pl.marcinsobanski.notificationssystem.api.cqrs.common.cqrs;
 
-public interface Query<RESULT> {
+public non-sealed interface Query<RESULT> extends Message<RESULT> {
 }

@@ -1,7 +1,7 @@
 package pl.marcinsobanski.notificationssystem.application.createtemplate;
 
 import lombok.RequiredArgsConstructor;
-import pl.marcinsobanski.notificationssystem.api.cqrs.common.cqrs.CommandHandler;
+import pl.marcinsobanski.notificationssystem.application.cqrs.CommandHandler;
 import pl.marcinsobanski.notificationssystem.api.cqrs.createtemplate.CreateTemplateCommand;
 import pl.marcinsobanski.notificationssystem.api.cqrs.createtemplate.CreateTemplateResult;
 import pl.marcinsobanski.notificationssystem.application.converters.RuleConverter;

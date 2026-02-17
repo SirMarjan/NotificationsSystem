@@ -11,7 +11,7 @@ import pl.marcinsobanski.notificationssystem.api.model.AddNewTemplateResponse;
 import pl.marcinsobanski.notificationssystem.api.model.TemplateDetails;
 import pl.marcinsobanski.notificationssystem.api.model.TemplateListElement;
 import pl.marcinsobanski.notificationssystem.api.model.UpdateTemplateResponse;
-import pl.marcinsobanski.notificationssystem.infrastructure.adapters.cqrs.CQCommandHandlerImpl;
+import pl.marcinsobanski.notificationssystem.infrastructure.adapters.cqrs.CQBusImpl;
 
 import java.util.List;
 import java.util.UUID;
@@ -20,7 +20,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class TemplateApiImpl implements TemplateApi {
 
-    private final CQCommandHandlerImpl cqCommandHandler;
+    private final CQBusImpl cqCommandHandler;
     private final TemplateDetailsViewToTemplateDetailsConverter templateDetailsViewToTemplateDetailsConverter;
     private final TemplateDetailsToCreateTemplateCommandConverter templateDetailsToCreateTemplateCommandConverter;
     private final TemplateDetailsToReplaceTemplateCommandConverter templateDetailsToReplaceTemplateCommandConverter;

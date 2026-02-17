@@ -1,7 +1,7 @@
 package pl.marcinsobanski.notificationssystem.application.sendnewprice;
 
 import lombok.RequiredArgsConstructor;
-import pl.marcinsobanski.notificationssystem.api.cqrs.common.cqrs.CommandHandler;
+import pl.marcinsobanski.notificationssystem.application.cqrs.CommandHandler;
 import pl.marcinsobanski.notificationssystem.api.cqrs.sendnewprice.SendNewPriceCommand;
 import pl.marcinsobanski.notificationssystem.domain.template.ItemType;
 import pl.marcinsobanski.notificationssystem.domain.template.TemplateRepository;

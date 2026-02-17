@@ -1,7 +1,7 @@
 package pl.marcinsobanski.notificationssystem.application.templatedetails;
 
 import lombok.RequiredArgsConstructor;
-import pl.marcinsobanski.notificationssystem.api.cqrs.common.cqrs.QueryHandler;
+import pl.marcinsobanski.notificationssystem.application.cqrs.QueryHandler;
 import pl.marcinsobanski.notificationssystem.api.cqrs.templatedetails.TemplateDetailsQuery;
 import pl.marcinsobanski.notificationssystem.api.cqrs.templatedetails.TemplateDetailsView;
 import pl.marcinsobanski.notificationssystem.application.listtemplates.TemplateToTemplateDetailsViewConverter;
