@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import pl.marcinsobanski.notificationssystem.application.converters.RuleConverter;
 import pl.marcinsobanski.notificationssystem.application.createtemplate.CreateTemplateCommandHandler;
 import pl.marcinsobanski.notificationssystem.application.listtemplates.ListTemplatesQueryHandler;
-import pl.marcinsobanski.notificationssystem.application.listtemplates.TemplateToTemplateDetailsViewConverter;
+import pl.marcinsobanski.notificationssystem.application.templatedetails.TemplateToTemplateDetailsViewConverter;
 import pl.marcinsobanski.notificationssystem.application.replacetemplate.ReplaceTemplateCommandHandler;
 import pl.marcinsobanski.notificationssystem.application.sendnewprice.EmailSender;
 import pl.marcinsobanski.notificationssystem.application.sendnewprice.SendNewPriceCommandHandler;

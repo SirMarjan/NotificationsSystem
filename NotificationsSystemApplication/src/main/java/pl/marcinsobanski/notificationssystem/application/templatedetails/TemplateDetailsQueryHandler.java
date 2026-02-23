@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import pl.marcinsobanski.notificationssystem.application.cqrs.QueryHandler;
 import pl.marcinsobanski.notificationssystem.api.cqrs.templatedetails.TemplateDetailsQuery;
 import pl.marcinsobanski.notificationssystem.api.cqrs.templatedetails.TemplateDetailsView;
-import pl.marcinsobanski.notificationssystem.application.listtemplates.TemplateToTemplateDetailsViewConverter;
 import pl.marcinsobanski.notificationssystem.domain.template.TemplateRepository;
 
 @RequiredArgsConstructor

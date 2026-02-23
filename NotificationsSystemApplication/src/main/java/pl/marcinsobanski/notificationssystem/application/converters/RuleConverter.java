@@ -21,7 +21,7 @@ public class RuleConverter {
         };
     }
 
-    public ItemTypeRule.Operator convertToItemTypeRule(RuleOperator ruleOperator) {
+    private ItemTypeRule.Operator convertToItemTypeRule(RuleOperator ruleOperator) {
         return switch (ruleOperator) {
             case ITEM_IS -> ItemTypeRule.Operator.IS;
             case ITEM_IS_NOT -> ItemTypeRule.Operator.IS_NOT;
@@ -29,7 +29,7 @@ public class RuleConverter {
         };
     }
 
-    public PriceRule.Operator convertToPriceRule(RuleOperator ruleOperator) {
+    private PriceRule.Operator convertToPriceRule(RuleOperator ruleOperator) {
         return switch (ruleOperator) {
             case PRICE_GREATER -> PriceRule.Operator.GREATER;
             case PRICE_GREATER_OR_EQUALS -> PriceRule.Operator.GREATER_OR_EQUAL;

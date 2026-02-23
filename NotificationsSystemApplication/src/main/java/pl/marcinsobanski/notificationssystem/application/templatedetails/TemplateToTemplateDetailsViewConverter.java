@@ -1,4 +1,4 @@
-package pl.marcinsobanski.notificationssystem.application.listtemplates;
+package pl.marcinsobanski.notificationssystem.application.templatedetails;
 
 import lombok.RequiredArgsConstructor;
 import pl.marcinsobanski.notificationssystem.api.cqrs.common.models.Rule;
