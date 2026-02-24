@@ -14,3 +14,7 @@ spring:
       enabled: true
       settings:
         web-allow-others: true
+management:
+  tracing:
+    export:
+      enabled: false

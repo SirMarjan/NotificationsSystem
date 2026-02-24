@@ -1,4 +1,4 @@
 package pl.marcinsobanski.notificationssystem.api.cqrs.common.cqrs;
 
-public non-sealed interface Command<RESULT> extends Message<RESULT> {
+public sealed interface Message<Result> permits Command, Query {
 }

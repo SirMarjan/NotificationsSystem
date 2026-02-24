@@ -1,15 +1,13 @@
 package pl.marcinsobanski.notificationssystem.application.replacetemplate;
 
 import lombok.RequiredArgsConstructor;
-import pl.marcinsobanski.notificationssystem.api.cqrs.common.cqrs.CommandHandler;
+import pl.marcinsobanski.notificationssystem.application.cqrs.CommandHandler;
 import pl.marcinsobanski.notificationssystem.api.cqrs.replacetemplate.ReplaceTemplateCommand;
 import pl.marcinsobanski.notificationssystem.application.converters.RuleConverter;
 import pl.marcinsobanski.notificationssystem.domain.compiledrule.CompiledRuleFactory;
 import pl.marcinsobanski.notificationssystem.domain.compiledrule.CompiledRuleRepository;
 import pl.marcinsobanski.notificationssystem.domain.template.Template;
 import pl.marcinsobanski.notificationssystem.domain.template.TemplateRepository;
-
-import java.time.Instant;
 
 @RequiredArgsConstructor
 public class ReplaceTemplateCommandHandler implements CommandHandler<Void, ReplaceTemplateCommand> {
